@@ -10,7 +10,7 @@ var table=function(){
         this.a=[];
         this.l=0;
     }
-    sorter.prototype.init=function(t,f){
+    sorter.prototype.init=function(t,f,desc){
         this.t=document.getElementById(t);
         this.b=this.t.getElementsByTagName('tbody')[0];
         this.r=this.b.rows; var l=this.r.length;
@@ -28,7 +28,11 @@ var table=function(){
             }
         }
         if(f!=null){
-            var a=new Function(this.n+'.work('+f+')'); a()
+            var a=new Function(this.n+'.work('+f+')');
+            a();
+            if (desc) {
+                a();
+            }
         }
     };
     sorter.prototype.work=function(y){
