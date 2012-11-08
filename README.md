@@ -6,6 +6,6 @@ http://www.scriptiny.com/2008/11/javascript-table-sorter/
 
 ## LICENSE
 
-(Creative Commons, Attribution 3.0 Unite States)
+(Creative Commons, Attribution 3.0 United States)
 
 http://creativecommons.org/licenses/by/3.0/us/
