@@ -40,7 +40,7 @@ var table=function(){
         var x=this.r[0].cells[y],i;
         for(i=0;i<this.l;i++){
             this.a[i].o=i+1; var v=this.r[i+1].cells[y].firstChild;
-            this.a[i].value=(v!=null)?v.nodeValue:'';
+            this.a[i].value=(v!=null)?getText(v):'';
         }
         for(i=0;i<this.w;i++){
             var c=this.r[0].cells[i];
@@ -62,9 +62,25 @@ var table=function(){
     };
     function compare(f,c){
         f=f.value,c=c.value;
-        var i=parseFloat(f.replace(/(\$|\,)/g,'')),n=parseFloat(c.replace(/(\$|\,)/g,''));
-        if(!isNaN(i)&&!isNaN(n)){f=i,c=n;}
+        if(f.match(/^[.0-9]+$/)&&c.match(/^[.0-9]+$/)){
+            f=parseFloat(f);
+            c=parseFloat(c);
+        }
         return (f>c?1:(f<c?-1:0));
+    }
+    function getText(node) {
+        var f=function(n, strs) {
+            if (n.nodeType==3 /* Node.TEXT_NODE */) {
+                strs.push(n.data);
+            } else if(n.nodeType==1 /* Node.ELEMENT_NODE */){
+                for (var m=n.firstChild; m!==null; m=m.nextSibling) {
+                    f(m, strs);
+                }
+            }
+        };
+        var strings = [];
+        f(node, strings);
+        return strings.join('');
     }
     return{sorter:sorter};
 }();
